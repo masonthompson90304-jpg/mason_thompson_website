@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Rivera | Technical Profile & Digital Card</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            surface: {
+              800: '#1e2330',
+              850: '#171b26',
+              900: '#0f1219',
+              950: '#090b10'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0b0e14;
+      color: #f1f5f9;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .glow-border {
+      box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.25);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 9999;
+      background: #ffffff;
+      color: #0f172a;
+      padding: 0.75rem 1rem;
+      border-radius: 0 0 0.5rem 0.5rem;
+      font-weight: 600;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid #60a5fa;
+      outline-offset: 3px;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80 px-4 py-3">
+    <nav aria-label="Main navigation">
+      <div class="max-w-5xl mx-auto flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-center justify-center sm:justify-start gap-2">
+          <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span class="text-xs font-semibold tracking-wide text-emerald-400 uppercase text-center sm:text-left">
+            Available for Hire &bull; 2026/2027
+          </span>
+        </div>
+
+        <div class="flex items-center justify-center gap-2">
+          <button
+            id="openEditBtn"
+            type="button"
+            aria-label="Edit profile information"
+            class="p-2 rounded-xl bg-slate-850 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 transition active:scale-95 flex items-center gap-1.5 text-xs font-medium"
+          >
+            <i data-lucide="edit-3" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+            <span>Edit Profile</span>
+          </button>
+
+          <button
+            id="openQrBtn"
+            type="button"
+            aria-label="Show QR code"
+            class="p-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium transition active:scale-95 shadow-lg shadow-brand-600/30 flex items-center gap-1.5 text-xs"
+          >
+            <i data-lucide="qr-code" class="w-4 h-4" aria-hidden="true"></i>
+            <span>Share QR</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="max-w-5xl mx-auto w-full px-4 pt-5 pb-16 flex-grow flex flex-col gap-6 sm:px-6 lg:px-8">
+    <section class="relative rounded-3xl bg-gradient-to-b from-slate-900 to-slate-900/90 border border-slate-800 p-6 glow-border shadow-xl md:p-8">
+      <div class="flex flex-col gap-5 md:grid md:grid-cols-[auto_1fr] md:items-start">
+        <div class="flex justify-start md:justify-center">
+          <div class="relative group" aria-label="Profile avatar">
+            <div id="avatarContainer" class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-600 via-indigo-600 to-sky-400 p-[2px] shadow-lg flex items-center justify-center overflow-hidden">
+              <div id="avatarInner" class="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center text-2xl font-bold text-white tracking-wider" aria-live="polite">
+                AR
+              </div>
+            </div>
+            <span class="absolute -bottom-1 -right-1 bg-brand-500 p-1 rounded-full text-white shadow-md" aria-label="Available for hire">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h1 id="displayName" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                Alex Rivera
+              </h1>
+              <p id="displayTitle" class="text-sm sm:text-base font-semibold text-brand-400 mt-1">
+                Chemical Engineering & Data Science
+              </p>
+            </div>
+
+            <div class="flex flex-col items-start sm:items-end gap-1.5 text-left sm:text-right">
+              <span id="displayGpaBadge" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <i data-lucide="award" class="w-3.5 h-3.5" aria-hidden="true"></i>
+                <span id="valGpaBadge">GPA: 3.88 / 4.0</span>
+              </span>
+              <span id="displayGradYear" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 border border-slate-700">
+                Class of 2026
+              </span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <p id="displayUniversity" class="text-xs text-slate-400 flex items-center gap-1.5 mt-1.5 font-medium">
+              <i data-lucide="graduation-cap" class="w-4 h-4 text-slate-500" aria-hidden="true"></i>
+              <span>Purdue University &bull; Honors College</span>
+            </p>
+            <p id="displayLocation" class="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500" aria-hidden="true"></i>
+              <span>West Lafayette, IN &bull; Open to Relocate</span>
+            </p>
+          </div>
+
+          <p id="displayPitch" class="text-xs sm:text-sm leading-relaxed text-slate-300">
+            "Bridging computational modeling and reaction engineering. Passionate about scalable process optimization, kinetic simulations, and industrial decarbonization."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-2.5 md:grid md:grid-cols-2 lg:grid-cols-3" aria-label="Primary actions">
+      <button
+        id="downloadVcardBtn"
+        type="button"
+        class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-brand-600 via-blue-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2.5 active:scale-[0.98] transition md:col-span-2 lg:col-span-2"
+      >
+        <i data-lucide="user-plus" class="w-5 h-5" aria-hidden="true"></i>
+        <span>Save Contact to Phone (.vcf)</span>
+      </button>
+
+      <a
+        id="displayLinkedinLink"
+        href="https://linkedin.com/in/alex-rivera-sample"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full py-3 px-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border border-slate-700/80 text-white font-medium text-sm flex items-center justify-between active:scale-[0.98] transition group"
+        aria-label="Connect with Alex on LinkedIn in a new tab"
+      >
+        <div class="flex items-center gap-2.5">
+          <span class="p-1.5 rounded-lg bg-blue-600/20 text-blue-400" aria-hidden="true">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+          </span>
+          <span>Connect on LinkedIn</span>
+        </div>
+        <i data-lucide="external-link" class="w-4 h-4 text-slate-400 group-hover:text-white transition" aria-hidden="true"></i>
+      </a>
+
+      <a
+        id="displayResumeLink"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full py-3 px-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border border-slate-700/80 text-white font-medium text-sm flex items-center justify-between active:scale-[0.98] transition group md:col-span-2 lg:col-span-3"
+        aria-label="View or download Alex Rivera resume in PDF format"
+      >
+        <div class="flex items-center gap-2.5">
+          <span class="p-1.5 rounded-lg bg-amber-500/20 text-amber-400" aria-hidden="true">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+          </span>
+          <span>View / Download Resume (PDF)</span>
+        </div>
+        <span class="text-xs text-slate-400 font-normal group-hover:text-slate-200">PDF &bull; 1 Page</span>
+      </a>
+
+      <div class="grid grid-cols-2 gap-2.5 md:col-span-2 lg:col-span-3">
+        <a id="displayEmailBtn" href="mailto:arivera.sample@purdue.edu" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-200 text-xs font-medium flex items-center justify-center gap-2 active:scale-[0.97] transition">
+          <i data-lucide="mail" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+          <span>Email Me</span>
+        </a>
+        <a id="displayPhoneBtn" href="tel:+13175550198" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-200 text-xs font-medium flex items-center justify-center gap-2 active:scale-[0.97] transition">
+          <i data-lucide="phone-call" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
+          <span>Call / Text</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="rounded-2xl bg-slate-900/80 border border-slate-800 p-5" aria-labelledby="skillsHeading">
+      <div class="flex items-center justify-between mb-3.5">
+        <h2 id="skillsHeading" class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <i data-lucide="cpu" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+          Core Competencies
+        </h2>
+        <span class="text-[10px] text-slate-500 font-mono">RECRUITER OVERVIEW</span>
+      </div>
+
+      <div id="skillsContainer" class="grid gap-3 md:grid-cols-2 xl:grid-cols-3" aria-live="polite"></div>
+    </section>
+
+    <section class="rounded-2xl bg-slate-900/80 border border-slate-800 p-5" aria-labelledby="projectsHeading">
+      <div class="flex items-center justify-between mb-4">
+        <h2 id="projectsHeading" class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+          Key Projects & Experience
+        </h2>
+        <span class="text-xs text-slate-500 font-medium">Tap to expand</span>
+      </div>
+
+      <div id="projectsContainer" class="grid gap-3 md:grid-cols-2 xl:grid-cols-3" aria-live="polite"></div>
+    </section>
+
+    <section class="rounded-2xl bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 p-4 text-xs text-slate-300 flex items-center gap-3" aria-label="Target roles">
+      <div class="p-2.5 rounded-xl bg-brand-500/10 text-brand-400 shrink-0" aria-hidden="true">
+        <i data-lucide="compass" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <span class="font-bold text-white block">Target Roles:</span>
+        <span class="text-slate-400">Process Engineering Intern / Co-op &bull; R&D Associate &bull; Computational Engineering (Summer/Fall 2026 or Full-time 2027)</span>
+      </div>
+    </section>
+  </main>
+
+  <aside class="sticky bottom-3 z-20 max-w-5xl mx-auto w-full px-4 pointer-events-none">
+    <div class="flex justify-end pointer-events-auto">
+      <button
+        id="floatingQrBtn"
+        type="button"
+        class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/95 hover:bg-slate-800 text-white text-xs font-semibold shadow-2xl border border-brand-500/40 backdrop-blur-md active:scale-95 transition sm:px-5 sm:py-3"
+        aria-label="Present my QR code"
+      >
+        <i data-lucide="qr-code" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+        <span>Present My QR</span>
+      </button>
+    </div>
+  </aside>
+
+  <footer class="py-6 border-t border-slate-900 text-center text-xs text-slate-500">
+    <p>Saved directly to device &bull; Tap 'Edit' to customize your credentials</p>
+  </footer>
+
+  <div
+    id="qrModal"
+    class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="qrTitle"
+    aria-hidden="true"
+  >
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl relative">
+      <button
+        id="closeQrBtn"
+        type="button"
+        class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full bg-slate-800/60 transition"
+        aria-label="Close QR code modal"
+      >
+        <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
+      </button>
+
+      <div class="mt-2 mb-4">
+        <h3 id="qrTitle" class="text-lg font-bold text-white">Scan to Open Profile</h3>
+        <p class="text-xs text-slate-400 mt-1">Point recruiter camera at this screen</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl mx-auto w-fit shadow-inner flex items-center justify-center" aria-label="QR code">
+        <div id="qrcodeDisplay" class="overflow-hidden"></div>
+      </div>
+
+      <div class="mt-4 flex flex-col gap-2">
+        <p class="text-[11px] text-slate-400 break-all font-mono bg-slate-950 p-2 rounded-lg border border-slate-800" id="currentQrUrlText">
+          https://...
+        </p>
+        <button
+          id="copyUrlBtn"
+          type="button"
+          class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-white flex items-center justify-center gap-2 transition active:scale-95"
+          aria-label="Copy current page link"
+        >
+          <i data-lucide="copy" class="w-4 h-4" aria-hidden="true"></i>
+          <span id="copyUrlBtnText">Copy Shareable Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="editModal"
+    class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="editTitle"
+    aria-hidden="true"
+  >
+    <div class="bg-slate-900 border border-slate-800 w-full max-w-lg max-h-[92vh] rounded-3xl p-5 md:p-6 shadow-2xl relative flex flex-col">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div>
+          <h3 id="editTitle" class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="sliders" class="w-4 h-4 text-brand-400" aria-hidden="true"></i>
+            Edit Profile & Credentials
+          </h3>
+          <p class="text-[11px] text-slate-400">Changes save automatically to your browser.</p>
+        </div>
+        <button
+          id="closeEditBtn"
+          type="button"
+          class="p-2 text-slate-400 hover:text-white rounded-full bg-slate-800/60 transition"
+          aria-label="Close edit profile modal"
+        >
+          <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex border-b border-slate-800 text-xs font-medium mt-2" role="tablist" aria-label="Profile configuration tabs">
+        <button
+          id="tabBtnBasic"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="tabContentBasic"
+          tabindex="0"
+          class="tab-btn py-2.5 px-3 border-b-2 border-brand-500 text-brand-400 font-semibold transition"
+        >
+          General Info
+        </button>
+        <button
+          id="tabBtnSkills"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tabContentSkills"
+          tabindex="-1"
+          class="tab-btn py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition"
+        >
+          Competencies & Skills
+        </button>
+        <button
+          id="tabBtnProjects"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="tabContentProjects"
+          tabindex="-1"
+          class="tab-btn py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition"
+        >
+          Projects & Roles
+        </button>
+      </div>
+
+      <form id="profileForm" class="overflow-y-auto custom-scrollbar pr-1 py-4 space-y-3.5 text-xs text-slate-300 flex-1">
+        <div id="tabContentBasic" role="tabpanel" aria-labelledby="tabBtnBasic" class="space-y-3.5">
+          <div>
+            <label for="inputName" class="block font-medium text-slate-300 mb-1">Full Name</label>
+            <input type="text" id="inputName" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div>
+            <label for="inputTitle" class="block font-medium text-slate-300 mb-1">Headline / Degree / Focus</label>
+            <input type="text" id="inputTitle" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label for="inputUniversity" class="block font-medium text-slate-300 mb-1">University / College</label>
+              <input type="text" id="inputUniversity" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+            <div>
+              <label for="inputGradYear" class="block font-medium text-slate-300 mb-1">Graduation Year / Class</label>
+              <input type="text" id="inputGradYear" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label for="inputGpa" class="block font-medium text-slate-300 mb-1">GPA / Standing</label>
+              <input type="text" id="inputGpa" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+            <div>
+              <label for="inputLocation" class="block font-medium text-slate-300 mb-1">Location & Availability</label>
+              <input type="text" id="inputLocation" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+          </div>
+
+          <div>
+            <label for="inputLinkedin" class="block font-medium text-slate-300 mb-1">LinkedIn Profile URL</label>
+            <input type="url" id="inputLinkedin" placeholder="https://linkedin.com/in/username" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label for="inputEmail" class="block font-medium text-slate-300 mb-1">Email Address</label>
+              <input type="email" id="inputEmail" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+            <div>
+              <label for="inputPhone" class="block font-medium text-slate-300 mb-1">Phone Number</label>
+              <input type="tel" id="inputPhone" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+            </div>
+          </div>
+
+          <div>
+            <label for="inputResume" class="block font-medium text-slate-300 mb-1">Resume Link (Google Drive / Dropbox / GitHub PDF)</label>
+            <input type="url" id="inputResume" placeholder="https://yourdomain.com/resume.pdf" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div>
+            <label for="inputPitch" class="block font-medium text-slate-300 mb-1">1-Sentence Elevator Pitch</label>
+            <textarea id="inputPitch" rows="2" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500"></textarea>
+          </div>
+        </div>
+
+        <div id="tabContentSkills" role="tabpanel" aria-labelledby="tabBtnSkills" class="space-y-4 hidden">
+          <p class="text-[11px] text-slate-400">Separate items with commas. They will automatically format as interactive badges.</p>
+
+          <div>
+            <label for="inputSkillCat1Title" class="block font-medium text-slate-300 mb-1">Category 1 Name</label>
+            <input type="text" id="inputSkillCat1Title" class="w-full px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500 mb-1.5">
+            <label for="inputSkillCat1Items" class="block text-[11px] text-slate-400 mb-1">Skills (comma-separated)</label>
+            <input type="text" id="inputSkillCat1Items" placeholder="Python, MATLAB, SQL, R" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div>
+            <label for="inputSkillCat2Title" class="block font-medium text-slate-300 mb-1">Category 2 Name</label>
+            <input type="text" id="inputSkillCat2Title" class="w-full px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500 mb-1.5">
+            <label for="inputSkillCat2Items" class="block text-[11px] text-slate-400 mb-1">Skills (comma-separated)</label>
+            <input type="text" id="inputSkillCat2Items" placeholder="Aspen Plus, COMSOL, AutoCAD, Git" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div>
+            <label for="inputSkillCat3Title" class="block font-medium text-slate-300 mb-1">Category 3 Name</label>
+            <input type="text" id="inputSkillCat3Title" class="w-full px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500 mb-1.5">
+            <label for="inputSkillCat3Items" class="block text-[11px] text-slate-400 mb-1">Skills (comma-separated)</label>
+            <input type="text" id="inputSkillCat3Items" placeholder="Transport Phenomena, Reactor Design, Thermodynamics" class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-brand-500">
+          </div>
+        </div>
+
+        <div id="tabContentProjects" role="tabpanel" aria-labelledby="tabBtnProjects" class="space-y-4 hidden">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-semibold text-white">Your Showcase Items</span>
+            <button
+              type="button"
+              id="addNewProjectBtn"
+              class="px-2.5 py-1.5 rounded-lg bg-brand-600/30 hover:bg-brand-600 text-brand-300 hover:text-white border border-brand-500/40 text-[11px] font-medium flex items-center gap-1 transition"
+            >
+              <i data-lucide="plus" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>Add Project</span>
+            </button>
+          </div>
+
+          <div id="editProjectsList" class="space-y-3"></div>
+        </div>
+      </form>
+
+      <div class="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="exportJsonBtn"
+            class="text-[11px] text-slate-400 hover:text-white bg-slate-850 px-2.5 py-1.5 rounded-lg border border-slate-700/60 transition"
+            title="Export backup file"
+          >
+            Export JSON
+          </button>
+
+          <label class="text-[11px] text-slate-400 hover:text-white bg-slate-850 px-2.5 py-1.5 rounded-lg border border-slate-700/60 cursor-pointer transition" title="Load backup file">
+            Import JSON
+            <input type="file" id="importJsonInput" accept=".json" class="hidden">
+          </label>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="resetDefaultsBtn"
+            class="text-xs text-rose-400 hover:text-rose-300 font-medium px-2 py-1"
+          >
+            Reset Defaults
+          </button>
+          <button
+            type="button"
+            id="saveEditBtn"
+            class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-xs text-white font-semibold shadow-md active:scale-95 transition"
+          >
+            Save & Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="toastMessage"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-emerald-500 text-slate-950 font-semibold text-xs px-4 py-2.5 rounded-full shadow-lg pointer-events-none opacity-0 transition-opacity duration-300 flex items-center gap-2"
+    aria-live="polite"
+    role="status"
+  >
+    <i data-lucide="check-circle-2" class="w-4 h-4" aria-hidden="true"></i>
+    <span id="toastText">Action completed</span>
+  </div>
+
+  <script>
+    const defaultData = {
+      name: "Alex Rivera",
+      title: "Chemical Engineering & Data Science",
+      university: "Purdue University • Honors College",
+      gradYear: "Class of 2026",
+      gpa: "GPA: 3.88 / 4.0",
+      location: "West Lafayette, IN • Open to Relocate",
+      pitch: "Bridging computational modeling and reaction engineering. Passionate about scalable process optimization, kinetic simulations, and industrial decarbonization.",
+      linkedin: "https://linkedin.com/in/alex-rivera-sample",
+      email: "arivera.sample@purdue.edu",
+      phone: "+1 (317) 555-0198",
+      resume: "https://example.com/resume.pdf",
+      skillCategories: [
+        {
+          title: "Languages & Computation:",
+          items: ["Python (NumPy, SciPy)", "MATLAB & Simulink", "SQL", "R"]
+        },
+        {
+          title: "Engineering & Process Tools:",
+          items: ["Aspen Plus / HYSYS", "COMSOL Multiphysics", "AutoCAD P&ID", "Git & CI/CD"]
+        },
+        {
+          title: "Relevant Coursework:",
+          items: ["Transport Phenomena", "Chemical Kinetics & Reactor Design", "Thermodynamics II", "Process Control & Dynamics"]
+        }
+      ],
+      projects: [
+        {
+          id: "p1",
+          title: "Continuous Reactor Kinetic Modeling",
+          accentColor: "bg-brand-400",
+          tagColor: "text-brand-300",
+          summary: "Developed dynamic ODE solvers in Python to predict non-isothermal CSTR thermal runaways under turbulent feed fluctuations.",
+          bullets: [
+            "Improved steady-state yield approximation by 14% against empirical pilot plant metrics.",
+            "Engineered interactive simulation dashboard in Streamlit for laboratory parameter adjustments."
+          ],
+          tags: ["Python", "SciPy ODE", "Process Safety"]
+        },
+        {
+          id: "p2",
+          title: "Aspen Plus Energy Integration Study",
+          accentColor: "bg-emerald-400",
+          tagColor: "text-emerald-300",
+          summary: "Conducted Pinch Analysis on an ethylene glycol purification column train, retrofitting a heat exchanger network.",
+          bullets: [
+            "Identified a 22% reduction in reboiler utility duty and $180k/yr in potential fuel savings.",
+            "Generated comprehensive PFD, heat & material balance tables, and equipment sizing sheets."
+          ],
+          tags: ["Aspen HYSYS", "Heat Transfer", "Pinch Analysis"]
+        },
+        {
+          id: "p3",
+          title: "Undergraduate Research • Nanomaterials",
+          accentColor: "bg-purple-400",
+          tagColor: "text-purple-300",
+          summary: "Synthesized metal-organic framework (MOF) sorbents for direct air carbon capture under NSF grant.",
+          bullets: [
+            "Processed automated gas-sorption isotherm data using custom NumPy analysis scripts.",
+            "Authored poster presented at 2025 AIChE Regional Student Conference."
+          ],
+          tags: ["Data Analytics", "Adsorption", "Lab Research"]
+        }
+      ]
+    };
+
+    let profileData = JSON.parse(JSON.stringify(defaultData));
+    let lastFocusedElement = null;
+
+    function showToast(text) {
+      const toast = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = text;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function getUsableQrUrl() {
+      if (window.location.protocol.startsWith('http')) {
+        return window.location.origin + window.location.pathname;
+      }
+
+      // Replace with your actual GitHub Pages URL
+      return 'https://yourusername.github.io/alex-profile/';
+    }
+
+    function loadData() {
+      try {
+        const saved = localStorage.getItem('career_fair_profile');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          profileData = Object.assign({}, defaultData, parsed);
+          if (!profileData.skillCategories || !profileData.skillCategories.length) {
+            profileData.skillCategories = defaultData.skillCategories;
+          }
+          if (!profileData.projects || !profileData.projects.length) {
+            profileData.projects = defaultData.projects;
+          }
+        }
+      } catch (e) {
+        console.warn('Could not read from localStorage', e);
+      }
+      renderDOM();
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem('career_fair_profile', JSON.stringify(profileData));
+        showToast('Profile changes saved!');
+      } catch (e) {
+        console.warn('Could not save to localStorage', e);
+      }
+      renderDOM();
+    }
+
+    function renderDOM() {
+      document.getElementById('displayName').textContent = profileData.name;
+      document.getElementById('displayTitle').textContent = profileData.title;
+      document.getElementById('displayUniversity').querySelector('span').textContent = profileData.university;
+      document.getElementById('displayGradYear').textContent = profileData.gradYear;
+      document.getElementById('valGpaBadge').textContent = profileData.gpa;
+      document.getElementById('displayLocation').querySelector('span').textContent = profileData.location;
+      document.getElementById('displayPitch').textContent = `"${profileData.pitch}"`;
+
+      const initials = profileData.name
+        .split(' ')
+        .map(n => n[0])
+        .filter(Boolean)
+        .slice(0, 2)
+        .join('')
+        .toUpperCase() || 'AR';
+
+      document.getElementById('avatarInner').textContent = initials;
+
+      document.getElementById('displayLinkedinLink').href = profileData.linkedin || '#';
+      document.getElementById('displayResumeLink').href = profileData.resume || '#';
+      document.getElementById('displayEmailBtn').href = `mailto:${profileData.email}`;
+      document.getElementById('displayPhoneBtn').href = `tel:${profileData.phone.replace(/[^0-9+]/g, '')}`;
+
+      const skillsContainer = document.getElementById('skillsContainer');
+      skillsContainer.innerHTML = '';
+
+      (profileData.skillCategories || []).forEach(cat => {
+        if (!cat.items || !cat.items.length) return;
+
+        const block = document.createElement('div');
+        block.className = 'rounded-xl border border-slate-800 bg-slate-950/60 p-3';
+
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'text-[11px] font-semibold text-slate-400 block mb-1.5';
+        titleSpan.textContent = cat.title;
+        block.appendChild(titleSpan);
+
+        const tagsDiv = document.createElement('div');
+        tagsDiv.className = 'flex flex-wrap gap-1.5';
+
+        cat.items.forEach(item => {
+          const badge = document.createElement('span');
+          badge.className = 'px-2.5 py-1 text-xs rounded-lg bg-slate-800 text-slate-200 border border-slate-700/80 font-medium';
+          badge.textContent = item;
+          tagsDiv.appendChild(badge);
+        });
+
+        block.appendChild(tagsDiv);
+        skillsContainer.appendChild(block);
+      });
+
+      const projectsContainer = document.getElementById('projectsContainer');
+      projectsContainer.innerHTML = '';
+
+      (profileData.projects || []).forEach(proj => {
+        const details = document.createElement('details');
+        details.className = 'group rounded-xl bg-slate-950/70 border border-slate-800 p-3.5 transition-all open:bg-slate-850/60 open:border-slate-700 cursor-pointer h-full';
+
+        const summary = document.createElement('summary');
+        summary.className = 'list-none flex items-center justify-between font-medium text-slate-200 text-sm select-none';
+
+        summary.innerHTML = `
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="w-2 h-2 rounded-full ${proj.accentColor || 'bg-brand-400'} shrink-0"></span>
+            <span class="font-semibold text-white truncate">${escapeHtml(proj.title)}</span>
+          </div>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 shrink-0" aria-hidden="true"></i>
+        `;
+
+        const content = document.createElement('div');
+        content.className = 'mt-3 pt-2.5 border-t border-slate-800/80 text-xs text-slate-300 space-y-2';
+
+        let bulletsHtml = '';
+        if (proj.bullets && proj.bullets.length) {
+          bulletsHtml = `
+            <ul class="list-disc pl-4 space-y-1 text-slate-400">
+              ${proj.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+            </ul>
+          `;
+        }
+
+        let tagsHtml = '';
+        if (proj.tags && proj.tags.length) {
+          tagsHtml = `
+            <div class="pt-1 flex flex-wrap gap-1.5">
+              ${proj.tags.map(t => `<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-800 ${proj.tagColor || 'text-brand-300'}">${escapeHtml(t)}</span>`).join('')}
+            </div>
+          `;
+        }
+
+        content.innerHTML = `
+          <p>${escapeHtml(proj.summary || '')}</p>
+          ${bulletsHtml}
+          ${tagsHtml}
+        `;
+
+        details.appendChild(summary);
+        details.appendChild(content);
+        projectsContainer.appendChild(details);
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function populateEditForm() {
+      document.getElementById('inputName').value = profileData.name || '';
+      document.getElementById('inputTitle').value = profileData.title || '';
+      document.getElementById('inputUniversity').value = profileData.university || '';
+      document.getElementById('inputGradYear').value = profileData.gradYear || '';
+      document.getElementById('inputGpa').value = profileData.gpa || '';
+      document.getElementById('inputLocation').value = profileData.location || '';
+      document.getElementById('inputLinkedin').value = profileData.linkedin || '';
+      document.getElementById('inputEmail').value = profileData.email || '';
+      document.getElementById('inputPhone').value = profileData.phone || '';
+      document.getElementById('inputResume').value = profileData.resume || '';
+      document.getElementById('inputPitch').value = profileData.pitch || '';
+
+      const cats = profileData.skillCategories || [];
+      document.getElementById('inputSkillCat1Title').value = cats[0]?.title || 'Languages & Computation:';
+      document.getElementById('inputSkillCat1Items').value = (cats[0]?.items || []).join(', ');
+
+      document.getElementById('inputSkillCat2Title').value = cats[1]?.title || 'Engineering & Process Tools:';
+      document.getElementById('inputSkillCat2Items').value = (cats[1]?.items || []).join(', ');
+
+      document.getElementById('inputSkillCat3Title').value = cats[2]?.title || 'Relevant Coursework:';
+      document.getElementById('inputSkillCat3Items').value = (cats[2]?.items || []).join(', ');
+
+      renderEditProjectsList();
+    }
+
+    function renderEditProjectsList() {
+      const container = document.getElementById('editProjectsList');
+      container.innerHTML = '';
+
+      (profileData.projects || []).forEach((proj, idx) => {
+        const itemBox = document.createElement('div');
+        itemBox.className = 'p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2 relative';
+
+        itemBox.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Project #${idx + 1}</span>
+            <button
+              type="button"
+              class="delete-proj-btn text-rose-400 hover:text-rose-300 text-xs flex items-center gap-1"
+              data-index="${idx}"
+              aria-label="Remove project ${idx + 1}"
+            >
+              <i data-lucide="trash-2" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>Remove</span>
+            </button>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5">Title</label>
+            <input type="text" class="proj-title-input w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs" value="${escapeHtml(proj.title)}">
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5">Overview / One-Liner</label>
+            <textarea rows="2" class="proj-summary-input w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs">${escapeHtml(proj.summary || '')}</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5">Bullet Points (one per line)</label>
+            <textarea rows="2" class="proj-bullets-input w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs">${(proj.bullets || []).join('\n')}</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5">Tags (comma-separated)</label>
+            <input type="text" class="proj-tags-input w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs" value="${(proj.tags || []).join(', ')}">
+          </div>
+        `;
+
+        container.appendChild(itemBox);
+      });
+
+      container.querySelectorAll('.delete-proj-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const index = parseInt(e.currentTarget.getAttribute('data-index'), 10);
+          profileData.projects.splice(index, 1);
+          renderEditProjectsList();
+        });
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function collectEditedProjects() {
+      const container = document.getElementById('editProjectsList');
+      const items = container.querySelectorAll('.p-3');
+      const updatedProjects = [];
+
+      items.forEach((item, idx) => {
+        const title = item.querySelector('.proj-title-input').value.trim() || `Project #${idx + 1}`;
+        const summary = item.querySelector('.proj-summary-input').value.trim();
+        const bulletsRaw = item.querySelector('.proj-bullets-input').value;
+        const bullets = bulletsRaw.split('\n').map(b => b.trim()).filter(Boolean);
+        const tagsRaw = item.querySelector('.proj-tags-input').value;
+        const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+
+        const colors = ['bg-brand-400', 'bg-emerald-400', 'bg-purple-400', 'bg-amber-400'];
+        const textColors = ['text-brand-300', 'text-emerald-300', 'text-purple-300', 'text-amber-300'];
+
+        updatedProjects.push({
+          id: `p_${Date.now()}_${idx}`,
+          title,
+          accentColor: colors[idx % colors.length],
+          tagColor: textColors[idx % textColors.length],
+          summary,
+          bullets,
+          tags
+        });
+      });
+
+      return updatedProjects;
+    }
+
+    function downloadVCard() {
+      const nameParts = profileData.name.trim().split(' ');
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+      const firstName = nameParts[0] || '';
+
+      const vcardText = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        `N:${lastName};${firstName};;;`,
+        `FN:${profileData.name}`,
+        `TITLE:${profileData.title}`,
+        `ORG:${profileData.university}`,
+        `EMAIL;TYPE=INTERNET,WORK:${profileData.email}`,
+        `TEL;TYPE=CELL,VOICE:${profileData.phone}`,
+        `URL:${profileData.linkedin}`,
+        `NOTE:${profileData.pitch} | ${profileData.location} | ${profileData.gpa}`,
+        'END:VCARD'
+      ].join('\r\n');
+
+      const blob = new Blob([vcardText], { type: 'text/vcard;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+
+      const tempLink = document.createElement('a');
+      tempLink.href = url;
+      tempLink.setAttribute('download', `${profileData.name.replace(/\s+/g, '_')}_Contact.vcf`);
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      URL.revokeObjectURL(url);
+
+      showToast('Contact card downloaded!');
+    }
+
+    function openDialog(dialogId, trigger) {
+      const dialog = document.getElementById(dialogId);
+      lastFocusedElement = trigger || document.activeElement;
+
+      dialog.classList.remove('hidden');
+      dialog.setAttribute('aria-hidden', 'false');
+
+      setTimeout(() => {
+        dialog.classList.remove('opacity-0');
+        dialog.classList.add('opacity-100');
+      }, 10);
+
+      const focusable = dialog.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (focusable.length) {
+        focusable[0].focus();
+      }
+    }
+
+    function closeDialog(dialogId) {
+      const dialog = document.getElementById(dialogId);
+      dialog.classList.remove('opacity-100');
+      dialog.classList.add('opacity-0');
+      dialog.setAttribute('aria-hidden', 'true');
+
+      setTimeout(() => {
+        dialog.classList.add('hidden');
+      }, 200);
+
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function openQrModal() {
+      const modal = document.getElementById('qrModal');
+      const currentUrl = getUsableQrUrl();
+      document.getElementById('currentQrUrlText').textContent = currentUrl;
+
+      const container = document.getElementById('qrcodeDisplay');
+      container.innerHTML = '';
+
+      new QRCode(container, {
+        text: currentUrl,
+        width: 190,
+        height: 190,
+        colorDark: '#0b0e14',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      openDialog('qrModal', document.getElementById('openQrBtn'));
+    }
+
+    function closeQrModal() {
+      closeDialog('qrModal');
+    }
+
+    function setupEditTabs() {
+      const tabButtons = [
+        { btn: document.getElementById('tabBtnBasic'), panel: document.getElementById('tabContentBasic') },
+        { btn: document.getElementById('tabBtnSkills'), panel: document.getElementById('tabContentSkills') },
+        { btn: document.getElementById('tabBtnProjects'), panel: document.getElementById('tabContentProjects') }
+      ];
+
+      const resetTabs = () => {
+        tabButtons.forEach(({ btn, panel }) => {
+          btn.className = 'tab-btn py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition';
+          btn.setAttribute('aria-selected', 'false');
+          btn.tabIndex = -1;
+          panel.classList.add('hidden');
+        });
+      };
+
+      tabButtons.forEach(({ btn, panel }) => {
+        btn.addEventListener('click', () => {
+          resetTabs();
+          btn.className = 'tab-btn py-2.5 px-3 border-b-2 border-brand-500 text-brand-400 font-semibold transition';
+          btn.setAttribute('aria-selected', 'true');
+          btn.tabIndex = 0;
+          panel.classList.remove('hidden');
+        });
+      });
+    }
+
+    function openEditModal() {
+      populateEditForm();
+      openDialog('editModal', document.getElementById('openEditBtn'));
+    }
+
+    function closeEditModal() {
+      closeDialog('editModal');
+    }
+
+    function exportProfileJson() {
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(profileData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', dataStr);
+      downloadAnchor.setAttribute('download', `${profileData.name.replace(/\s+/g, '_')}_profile.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Profile data exported!');
+    }
+
+    function importProfileJson(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const imported = JSON.parse(evt.target.result);
+          profileData = Object.assign({}, defaultData, imported);
+          saveData();
+          populateEditForm();
+          showToast('Profile imported successfully!');
+        } catch (err) {
+          showToast('Invalid JSON file');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function bindEvents() {
+      document.getElementById('downloadVcardBtn').addEventListener('click', downloadVCard);
+
+      document.getElementById('openQrBtn').addEventListener('click', () => openQrModal());
+      document.getElementById('floatingQrBtn').addEventListener('click', () => openQrModal());
+      document.getElementById('closeQrBtn').addEventListener('click', closeQrModal);
+
+      document.getElementById('qrModal').addEventListener('click', (e) => {
+        if (e.target.id === 'qrModal') closeQrModal();
+      });
+
+      document.getElementById('copyUrlBtn').addEventListener('click', () => {
+        const textToCopy = getUsableQrUrl();
+        const tempText = document.createElement('textarea');
+        tempText.value = textToCopy;
+        document.body.appendChild(tempText);
+        tempText.select();
+
+        try {
+          document.execCommand('copy');
+          showToast('URL copied to clipboard!');
+          const btnSpan = document.getElementById('copyUrlBtnText');
+          btnSpan.textContent = 'Copied!';
+          setTimeout(() => { btnSpan.textContent = 'Copy Shareable Link'; }, 2000);
+        } catch (err) {
+          showToast('Failed to copy URL');
+        }
+
+        document.body.removeChild(tempText);
+      });
+
+      document.getElementById('openEditBtn').addEventListener('click', openEditModal);
+      document.getElementById('closeEditBtn').addEventListener('click', closeEditModal);
+
+      document.getElementById('editModal').addEventListener('click', (e) => {
+        if (e.target.id === 'editModal') closeEditModal();
+      });
+
+      document.getElementById('addNewProjectBtn').addEventListener('click', () => {
+        if (!profileData.projects) profileData.projects = [];
+        profileData.projects.push({
+          id: `p_${Date.now()}`,
+          title: 'New Project / Research',
+          accentColor: 'bg-brand-400',
+          tagColor: 'text-brand-300',
+          summary: 'Describe what you built, designed, or researched here.',
+          bullets: ['Key result, efficiency improvement, or data point.'],
+          tags: ['Engineering', 'Design']
+        });
+        renderEditProjectsList();
+      });
+
+      document.getElementById('saveEditBtn').addEventListener('click', () => {
+        profileData.name = document.getElementById('inputName').value.trim() || defaultData.name;
+        profileData.title = document.getElementById('inputTitle').value.trim() || defaultData.title;
+        profileData.university = document.getElementById('inputUniversity').value.trim() || defaultData.university;
+        profileData.gradYear = document.getElementById('inputGradYear').value.trim() || defaultData.gradYear;
+        profileData.gpa = document.getElementById('inputGpa').value.trim() || defaultData.gpa;
+        profileData.location = document.getElementById('inputLocation').value.trim() || defaultData.location;
+        profileData.linkedin = document.getElementById('inputLinkedin').value.trim() || defaultData.linkedin;
+        profileData.email = document.getElementById('inputEmail').value.trim() || defaultData.email;
+        profileData.phone = document.getElementById('inputPhone').value.trim() || defaultData.phone;
+        profileData.resume = document.getElementById('inputResume').value.trim() || defaultData.resume;
+        profileData.pitch = document.getElementById('inputPitch').value.trim() || defaultData.pitch;
+
+        const cat1Title = document.getElementById('inputSkillCat1Title').value.trim() || 'Languages & Computation:';
+        const cat1Items = document.getElementById('inputSkillCat1Items').value.split(',').map(s => s.trim()).filter(Boolean);
+
+        const cat2Title = document.getElementById('inputSkillCat2Title').value.trim() || 'Engineering & Process Tools:';
+        const cat2Items = document.getElementById('inputSkillCat2Items').value.split(',').map(s => s.trim()).filter(Boolean);
+
+        const cat3Title = document.getElementById('inputSkillCat3Title').value.trim() || 'Relevant Coursework:';
+        const cat3Items = document.getElementById('inputSkillCat3Items').value.split(',').map(s => s.trim()).filter(Boolean);
+
+        profileData.skillCategories = [
+          { title: cat1Title, items: cat1Items },
+          { title: cat2Title, items: cat2Items },
+          { title: cat3Title, items: cat3Items }
+        ];
+
+        profileData.projects = collectEditedProjects();
+        saveData();
+        closeEditModal();
+      });
+
+      document.getElementById('resetDefaultsBtn').addEventListener('click', () => {
+        profileData = JSON.parse(JSON.stringify(defaultData));
+        saveData();
+        populateEditForm();
+        showToast('Reset to default profile');
+      });
+
+      document.getElementById('exportJsonBtn').addEventListener('click', exportProfileJson);
+      document.getElementById('importJsonInput').addEventListener('change', importProfileJson);
+
+      document.addEventListener('keydown', (event) => {
+        const openDialog = document.querySelector('[role="dialog"][aria-hidden="false"]');
+        if (!openDialog) return;
+
+        if (event.key === 'Escape') {
+          if (openDialog.id === 'qrModal') closeQrModal();
+          if (openDialog.id === 'editModal') closeEditModal();
+        }
+      });
+    }
+
+    window.onload = function() {
+      loadData();
+      setupEditTabs();
+      bindEvents();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    };
+  </script>
+</body>
+</html>
